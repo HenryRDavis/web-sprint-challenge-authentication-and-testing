@@ -7,7 +7,7 @@ const testUser = { username: 'test', password: 'test' };
 
 describe('server.js', () => {
   describe('get request for jokes', () => {
-    it('should return a status of 400 when not logged in', () => {
+    it('should return a status of 401 when not logged in', () => {
       return supertest(server).get('/api/jokes')
         .then(res => {
           expect(res.status).toBe(401);
@@ -33,7 +33,7 @@ describe('server.js', () => {
         })
     });
 
-    it('should return status code 500 when adding invalid user', async () => {
+    it('should return status code 400 when adding invalid user', async () => {
       return supertest(server).post('/api/auth/register')
         .send({user: 'bob', pass: 'joe'})
         .then(res => {
